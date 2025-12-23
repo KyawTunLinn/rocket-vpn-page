@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket VPN - Installation</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="brand">
+                <a href="index.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.png" alt="Rocket VPN Logo" width="30" height="30">
+                    <span>Rocket VPN</span>
+                </a>
+            </div>
+            <div class="header-links">
+                <a href="index.html">Home</a>
+                <a href="download.html">Download</a>
+                <a href="installation.html">Installation</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="donate.html">Donate</a>
+                <a href="github.html">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>Installation Guide</h1>
+        <p>Follow these simple steps to install Rocket VPN on your server.</p>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🚀</i> Quick Install
+            </div>
+            <div class="feature-content">
+                <p>Once you have the `setup.sh` script (from the repository), run it as root:</p>
+                <div style="position: relative;">
+                    <button onclick="copyToClipboard('install-commands')"
+                        style="position: absolute; top: 10px; right: 10px; background-color: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 12px; z-index: 10;">
+                        📋 Copy
+                    </button>
+                    <div id="install-commands"
+                        style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; border: 1px solid #ddd;">
+                        # 1. Install Necessary<br>
+                        apt update && sudo apt upgrade -y<br>
+                        apt install curl wget unzip -y<br>
+                        # 2. Download the installer<br>
+                        wget
+                        https://github.com/KyawTunLinn/rocket-vpn/releases/download/rocket-vpn-0.0.2/rocket-vpn-0.0.2-installer.zip<br>
+                        # 3. Unzip the installer<br>
+                        unzip rocket-vpn-0.0.2-installer.zip<br>
+                        # 4. Change directory to the installer<br>
+                        cd rocket-vpn-0.0.2-installer<br>
+                        # 5. Make the installer executable<br>
+                        chmod +x setup.sh<br>
+                        # 6. Run the installer<br>
+                        ./setup.sh
+                    </div>
+                </div>
+                <p>This script will automatically:</p>
+                <ul>
+                    <li>Install WireGuard® kernel modules and tools</li>
+                    <li>Install Java 21 (OpenJDK)</li>
+                    <li>Enable IP Forwarding</li>
+                    <li>Configure the systemd service for Rocket VPN</li>
+                    <li>Start the Rocket VPN service </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>📋</i> Requirements
+            </div>
+            <div class="feature-content">
+                <ul>
+                    <li><strong>Debian 12 and above</strong> or <strong>Ubuntu 24.04 and above</strong></li>
+                    <li>Root privileges</li>
+                    <li>Port <strong>51820/UDP</strong> (WireGuard)</li>
+                    <li>Port <strong>8080/TCP</strong> (Web UI)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🗑️</i> Uninstallation
+            </div>
+            <div class="feature-content">
+                <p>To completely remove Rocket VPN, WireGuard, and Java:</p>
+                <div style="position: relative;">
+                    <button onclick="copyToClipboard('uninstall-commands')"
+                        style="position: absolute; top: 10px; right: 10px; background-color: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 12px; z-index: 10;">
+                        📋 Copy
+                    </button>
+                    <div id="uninstall-commands"
+                        style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; border: 1px solid #ddd;">
+                        chmod +x uninstall.sh<br>
+                        sudo ./uninstall.sh
+                    </div>
+                </div>
+                <p><strong>Warning:</strong> This will delete all configuration files and data.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Rocket VPN Project. <br>
+            WireGuard® is a registered trademark of Jason A. Donenfeld. Rocket VPN is not affiliated with WireGuard.</p>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+
+        <script>
+            function copyToClipboard(elementId) {
+                const element = document.getElementById(elementId);
+                const text = element.innerText || element.textContent;
+
+                navigator.clipboard.writeText(text).then(function () {
+                    // Find the button that was clicked
+                    const button = event.target;
+                    const originalText = button.innerHTML;
+
+                    // Change button text to show success
+                    button.innerHTML = '✓ Copied!';
+                    button.style.backgroundColor = '#27ae60';
+
+                    // Reset button after 2 seconds
+                    setTimeout(function () {
+                        button.innerHTML = originalText;
+                        button.style.backgroundColor = '#3498db';
+                    }, 2000);
+                }).catch(function (err) {
+                    console.error('Failed to copy text: ', err);
+                    alert('Failed to copy to clipboard');
+                });
+            }
+
+            function openLightbox(src) {
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImg = document.getElementById('lightbox-img');
+                lightbox.style.display = "flex";
+                // setTimeout to allow display:flex to apply before adding class for opacity transition if we wanted specific animation
+                // For now, simple display toggle.
+                lightboxImg.src = src;
+            }
+
+            function closeLightbox() {
+                var lightbox = document.getElementById('lightbox');
+                lightbox.style.display = "none";
+            }
+        </script>
+    </footer>
+
+</body>
+
+</html>

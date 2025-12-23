@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket VPN - Fast, Modern, Secure VPN Tunnel</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="brand">
+                <a href="index.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.png" alt="Rocket VPN Logo" width="30" height="30">
+                    <span>Rocket VPN</span>
+                </a>
+            </div>
+            <div class="header-links">
+                <a href="index.html">Home</a>
+                <a href="download.html">Download</a>
+                <a href="installation.html">Installation</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="donate.html">Donate</a>
+                <a href="github.html">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="images/logo.png" alt="Rocket VPN Logo" class="hero-logo">
+        <h1>ROCKET VPN</h1>
+        <p>Fast, Modern, Secure VPN Tunnel</p>
+    </section>
+
+    <div class="main-content">
+        <div class="intro-text">
+            <h3>Welcome to Rocket VPN</h3>
+            <p>
+                A simple and powerful way to manage your <strong>WireGuard®</strong> VPN server.
+                Designed with the clarity of modern software.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>#</i> Simple Management
+            </div>
+            <div class="feature-content">
+                Manage your VPN directly from this website. No complicated commands. Add clients, see your
+                connection status, and stay secure.
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🎛️</i> Total Control
+            </div>
+            <div class="feature-content">
+                You are in charge of your network. Easily block or allow access for any user. Configure settings to
+                match your specific needs without restarting the whole system.
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>⚡</i> Powered by WireGuard®
+            </div>
+            <div class="feature-content">
+                Under the hood, Rocket VPN utilizes the state-of-the-art <strong>WireGuard</strong> protocol.
+                This means you get all the benefits of WireGuard: <strong>high performance</strong>, modern
+                cryptography
+                (Curve25519, ChaCha20, Poly1305), and a minimal attack surface.
+            </div>
+        </div>
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>📸</i> App Screenshots
+            </div>
+            <div class="feature-content" style="padding: 0;">
+                <div class="carousel-container">
+                    <div class="carousel-slide fade">
+                        <img src="images/screenshot_dashboard.png" style="width:100%" alt="Dashboard"
+                            onclick="openLightbox(this.src)">
+                        <div class="text">Intuitive Dashboard</div>
+                    </div>
+                    <div class="carousel-slide fade">
+                        <img src="images/screenshot_login.png" style="width:100%" alt="Login"
+                            onclick="openLightbox(this.src)">
+                        <div class="text">Secure Login</div>
+                    </div>
+                    <div class="carousel-slide fade">
+                        <img src="images/screenshot_settings.png" style="width:100%" alt="Settings"
+                            onclick="openLightbox(this.src)">
+                        <div class="text">Client Management</div>
+                    </div>
+                    <div class="carousel-slide fade">
+                        <img src="images/screenshot_factory_reset.png" style="width:100%" alt="Reset"
+                            onclick="openLightbox(this.src)">
+                        <div class="text">System Safety</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            if (slides[slideIndex - 1]) {
+                slides[slideIndex - 1].style.display = "block";
+            }
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+    </script>
+
+
+
+
+
+    <footer>
+        <p>Rocket VPN Project. <br>
+            WireGuard® is a registered trademark of Jason A. Donenfeld. Rocket VPN is not affiliated with WireGuard.</p>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+
+        <script>
+            function openLightbox(src) {
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImg = document.getElementById('lightbox-img');
+                lightbox.style.display = "flex";
+                // setTimeout to allow display:flex to apply before adding class for opacity transition if we wanted specific animation
+                // For now, simple display toggle.
+                lightboxImg.src = src;
+            }
+
+            function closeLightbox() {
+                var lightbox = document.getElementById('lightbox');
+                lightbox.style.display = "none";
+            }
+        </script>
+    </footer>
+
+</body>
+
+</html>

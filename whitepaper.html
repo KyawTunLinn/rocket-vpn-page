@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket VPN - Whitepaper</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="brand">
+                <a href="index.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.png" alt="Rocket VPN Logo" width="30" height="30">
+                    <span>Rocket VPN</span>
+                </a>
+            </div>
+            <div class="header-links">
+                <a href="index.html">Home</a>
+                <a href="download.html">Download</a>
+                <a href="installation.html">Installation</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="donate.html">Donate</a>
+                <a href="github.html">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>Rocket VPN Whitepaper</h1>
+        <p>Understanding the architecture, security, and performance of Rocket VPN.</p>
+
+        <div class="intro-text">
+            <h3>Abstract</h3>
+            <p>Rocket VPN is a monolithic <strong>Spring Boot</strong> application designed to manage a
+                <strong>WireGuard</strong> VPN server. It provides a web-based dashboard for administrators to manage
+                clients (peers), monitor usage, and configure system settings.
+            </p>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🏗️</i> Architecture Overview
+            </div>
+            <div class="feature-content">
+                <p>Rocket VPN connects the user through a secure web layer down to the kernel-level WireGuard interface.
+                </p>
+                <ul>
+                    <li><strong>Presentation Layer:</strong> Server-side rendered HTML with Thymeleaf.</li>
+                    <li><strong>Application Layer:</strong> Core services for key generation (`wg genkey`), config
+                        synchronization, and admin authentication (Spring Security).</li>
+                    <li><strong>Data Layer:</strong> Embedded H2 Database for storing client and system configurations.
+                    </li>
+                    <li><strong>Infrastructure:</strong> Direct interaction with system tools (`wg`, `wg-quick`,
+                        `iptables`).</li>
+                </ul>
+                <div style="margin-top: 20px; text-align: center;">
+                    <img src="images/architecture_diagram.png" alt="Architecture Diagram"
+                        style="max-width: 100%; border: 1px solid #ddd; border-radius: 5px;"
+                        onclick="openLightbox(this.src)">
+                    <p style="font-size: 0.9em; color: #666;">Figure 1: High-Level Component Diagram</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🔄</i> Client Creation Flow
+            </div>
+            <div class="feature-content">
+                <p>Creating a client involves generating cryptographic keys and reloading the WireGuard configuration
+                    without stopping the tunnel.</p>
+                <div style="margin-top: 20px; text-align: center;">
+                    <img src="images/client_creation_sequence_diagram.png" alt="Client Creation Sequence"
+                        style="max-width: 100%; border: 1px solid #ddd; border-radius: 5px;"
+                        onclick="openLightbox(this.src)">
+                    <p style="font-size: 0.9em; color: #666;">Figure 2: Sequence of operations when adding a new client
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>📊</i> Program Flow
+            </div>
+            <div class="feature-content">
+                <p>The following flowchart illustrates the overall program execution flow, from initialization to
+                    request handling.</p>
+                <div style="margin-top: 20px; text-align: center;">
+                    <img src="images/program_flowchart.png" alt="Program Flow Chart"
+                        style="max-width: 100%; border: 1px solid #ddd; border-radius: 5px;"
+                        onclick="openLightbox(this.src)">
+                    <p style="font-size: 0.9em; color: #666;">Figure 3: Rocket VPN Program Execution Flow</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🔒</i> Security Analysis
+            </div>
+            <div class="feature-content">
+                <p>Rocket VPN prioritizes security at both the application and network levels.</p>
+                <h4>Authentication & Authorization</h4>
+                <ul>
+                    <li><strong>Mechanism:</strong> Spring Security with BCrypt password hashing.</li>
+                    <li><strong>Access Control:</strong> Strict role-based access; only authenticated admins can manage
+                        the VPN.</li>
+                </ul>
+                <h4>Network Security</h4>
+                <ul>
+                    <li><strong>Cryptography:</strong> Inherits WireGuard's Noise protocol framework (Curve25519,
+                        ChaCha20, Poly1305).</li>
+                    <li><strong>Minimal Attack Surface:</strong> The server stealthily drops unauthenticated packets.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>⚙️</i> Technical Implementation
+            </div>
+            <div class="feature-content">
+                <p>The Rocket VPN backend is built with Java and Spring Boot, communicating directly with the Linux
+                    kernel via command-line tools (wg, wg-quick) to manage interfaces.</p>
+                <p>State is managed in memory and persisted to standard WireGuard configuration files, ensuring
+                    compatibility with standard tools.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Rocket VPN Project. <br>
+            WireGuard® is a registered trademark of Jason A. Donenfeld. Rocket VPN is not affiliated with WireGuard.</p>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+
+        <script>
+            function openLightbox(src) {
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImg = document.getElementById('lightbox-img');
+                lightbox.style.display = "flex";
+                // setTimeout to allow display:flex to apply before adding class for opacity transition if we wanted specific animation
+                // For now, simple display toggle.
+                lightboxImg.src = src;
+            }
+
+            function closeLightbox() {
+                var lightbox = document.getElementById('lightbox');
+                lightbox.style.display = "none";
+            }
+        </script>
+    </footer>
+
+</body>
+
+</html>

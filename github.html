@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket VPN - GitHub</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="brand">
+                <a href="index.html"
+                    style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                    <img src="images/logo.png" alt="Rocket VPN Logo" width="30" height="30">
+                    <span>Rocket VPN</span>
+                </a>
+            </div>
+            <div class="header-links">
+                <a href="index.html">Home</a>
+                <a href="download.html">Download</a>
+                <a href="installation.html">Installation</a>
+                <a href="whitepaper.html">Whitepaper</a>
+                <a href="donate.html">Donate</a>
+                <a href="github.html">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>Open Source & Community</h1>
+        <p>Rocket VPN is fully open source. Transparency is key to security.</p>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>💻</i> Repositories
+            </div>
+            <div class="feature-content">
+                <p>Rocket VPN code is hosted on GitHub. Feel free to star, fork, and contribute!</p>
+                <ul>
+                    <li><a href="https://github.com/KyawTunLinn/rocket-vpn"
+                            style="color: #3498db; text-decoration: none; font-weight: bold;">rocketvpn</a> - The
+                        Organization</li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="feature-header">
+                <i>🐛</i> Report Issues
+            </div>
+            <div class="feature-content">
+                <p>Found a bug? Have a feature request? Please open an issue on Rocket VPN GitHub tracker.</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://github.com/KyawTunLinn/rocket-vpn/issues" class="cta-button"
+                        style="background-color: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Go
+                        to Issue Tracker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Rocket VPN Project. <br>
+            WireGuard® is a registered trademark of Jason A. Donenfeld. Rocket VPN is not affiliated with WireGuard.</p>
+
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+
+        <script>
+            function openLightbox(src) {
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImg = document.getElementById('lightbox-img');
+                lightbox.style.display = "flex";
+                // setTimeout to allow display:flex to apply before adding class for opacity transition if we wanted specific animation
+                // For now, simple display toggle.
+                lightboxImg.src = src;
+            }
+
+            function closeLightbox() {
+                var lightbox = document.getElementById('lightbox');
+                lightbox.style.display = "none";
+            }
+        </script>
+    </footer>
+
+</body>
+
+</html>
